@@ -1,4 +1,4 @@
-#include <algorithm>    // std::random_shuffle
+#include <cstdlib>      // std::rand
 #include <vector>       // std::vector
 #include "Monster.hh"
 
@@ -43,41 +43,47 @@ void	Monster::update(Subject *sub)
 void	Monster::move() {
 	int previousPosX = this->posX;
 	int previousPosY = this->posY;
-	std::vector<ACharacter::Direction> validDirections;
+	ACharacter::Direction previousDirection = this->direction;
 
-	// Try to go forward
-	try {
-		this->updateNewPosition(this->direction);
-		this->notify();
-		validDirections.push_back(this->direction);
-	} catch (std::exception e) {}
-	// Try to go right from current direction
-	try {
-		this->posX = previousPosX;
-		this->posY = previousPosY;
-		this->updateNewPosition(static_cast<ACharacter::Direction>((this->direction + 1) % 4));
-		this->notify();
-		validDirections.push_back(static_cast<ACharacter::Direction>((this->direction + 1) % 4));
-	} catch (std::exception e) {}
-	// Try to go left from current direction
-	try {
-		this->posX = previousPosX;
-		this->posY = previousPosY;
-		this->updateNewPosition(static_cast<ACharacter::Direction>((this->direction + 3) % 4));
-		this->notify();
-		validDirections.push_back(static_cast<ACharacter::Direction>((this->direction + 3) % 4));
-	} catch (std::exception e) {}
-
-	// Randomize valid directions
-	std::random_shuffle(validDirections.begin(), validDirections.end());
-	// Choose random direction
-	this->direction = validDirections.back();
-	// Update position with current direction
-	this->posX = previousPosX;
-	this->posY = previousPosY;
-	this->updateNewPosition(this->direction);
-	// And finally, move !
-	this->notify();
+	int randomDirection = std::rand() % 3;
+	if (randomDirection == 0) {
+		// Try to go forward
+		try {
+			this->updateNewPosition(this->direction);
+			this->notify();
+		} catch (std::exception e) {
+			// Failed to move in that direction, try again
+			this->posX = previousPosX;
+			this->posY = previousPosY;
+			this->move();
+		}	
+	} else if (randomDirection == 1) {
+		// Try to go right from current direction
+		try {
+			this->direction = static_cast<ACharacter::Direction>((this->direction + 1) % 4);
+			this->updateNewPosition(this->direction);
+			this->notify();
+		} catch (std::exception e) {
+			// Failed to move in that direction, try again
+			this->posX = previousPosX;
+			this->posY = previousPosY;
+			this->direction = previousDirection;
+			this->move();
+		}
+	} else {
+		// Try to go left from current direction
+		try {
+			this->direction = static_cast<ACharacter::Direction>((this->direction + 3) % 4);
+			this->updateNewPosition(this->direction);
+			this->notify();
+		} catch (std::exception e) {
+			// Failed to move in that direction, try again
+			this->posX = previousPosX;
+			this->posY = previousPosY;
+			this->direction = previousDirection;
+			this->move();
+		}
+	}
 }
 
 void	Monster::decrease()
