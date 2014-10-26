@@ -2,6 +2,9 @@
 #include <vector>       // std::vector
 #include "Monster.hh"
 
+/*
+** To see all the elements of the class easly 
+*/
 std::ostream& operator<<(std::ostream& os, const Monster& monster)
 {
 	static std::string const dir[4] = {"up", "right", "down", "left"};

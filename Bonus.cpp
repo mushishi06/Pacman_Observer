@@ -20,6 +20,7 @@ void Bonus::update(Subject *sub)
 	
 	if (elem->getPosx() == this->posX && elem->getPosy() == this->posY)
 	{
+		std::cout << this->name << " is getting eaten" << std::endl;
 		--this->lifePoints;
 		this->notify();
 	}
