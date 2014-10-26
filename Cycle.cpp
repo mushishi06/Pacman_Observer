@@ -230,38 +230,32 @@ void	Cycle::display() const {
 
 void	Cycle::gameLoop()
 {
-  while (_player->getLifePoints() >= 0)
-    {
-      //std::cerr << "Player as "<< _player->getLifePoints() << std::endl;
-      system("clear");
-      //      std::cerr << "end clear" << std::endl;
-      display();
-      if (_bonus.empty())
-      {
-      	std::cout << "YOU WIN!" << std::endl;
-      	return ;
-      }
-      // std::cerr << "end display" << std::endl;
-      if (getUserInput() == 'q')
-      {
-      	std::cout << "GOOD BYE!" << std::endl;
-      	return ;
-      }
-      //      std::cerr << "--> end user input" << std::endl;
-      _player->move();
-      if (_player->getLifePoints() <= 0)
-      	{
-      		std::cout << "YOU'RE DEAD" << std::endl;
-      		return ;
-      	}
-      // std::cerr << "end player move" << std::endl;
-      for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); ++it) {
-		(*it)->move();
-		(*it)->decrease();
-      }
-      //      std::cerr << "--> end monster move"<< std::endl;
-      cleanAll();
-      //      std::cerr << "--> end cleanAll"<< std::endl;
-    }
-    std::cout << "YOU'RE DEAD" << std::endl;
+	while (_player->getLifePoints() >= 0)
+	{
+		// Loop Logic
+		// Display and prompt
+		display();
+		if (getUserInput() == 'q')
+		{
+			std::cout << "GOOD BYE!" << std::endl;
+			return;
+		}
+		system("clear");
+		_player->move();
+		if (_player->getLifePoints() <= 0)
+		{
+			std::cout << "GAME OVER" << std::endl;
+			return;
+		}
+		for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); ++it) {
+			(*it)->move();
+			(*it)->decrease();
+		}
+		cleanAll();
+		if (_bonus.empty())
+		{
+			std::cout << "YOU WIN!" << std::endl;
+			return;
+		}
+	}
 }

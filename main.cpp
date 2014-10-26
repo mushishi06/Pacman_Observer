@@ -40,11 +40,6 @@ int main(int ac, char **av)
 
 	Cycle	c;
 	c.initialize(map, mapSizeX, mapSizeY);
-	c.display();
-
 	c.gameLoop();
-	//std::cout << "type smth" << std::endl;
-	//	char cmd = c.getUserInput();
-	//	std::cout << "Commande is == " << cmd << std::endl;
 	return (0);
 }
