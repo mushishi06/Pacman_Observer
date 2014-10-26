@@ -120,12 +120,12 @@ void	Cycle::checkEatable()
 
 void	Cycle::cleanAll()
 {
-	for (std::list<GameElement *>::iterator it = _gameElements.begin(); it != _gameElements.end(); it++) {
-		if ((*it)->getLifePoints() <= 0)
+	for (std::list<Bonus *>::iterator it = _bonus.begin(); it != _bonus.end(); it++) {
+	  if ((*it)->getLifePoints() <= 0 && (*it)->isSpecial())
 		  {
-		    GameElement* tmp = *it;
+		    Bonus* tmp = *it;
 		    (*it)->detach(_player);
-		    it = _gameElements.erase(it);
+		    it = _bonus.erase(it);
 		    delete tmp;
 		  }
 	}
