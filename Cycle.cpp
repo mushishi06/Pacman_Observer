@@ -230,32 +230,31 @@ void	Cycle::display() const {
 
 void	Cycle::gameLoop()
 {
-	while (_player->getLifePoints() >= 0)
+	while (_player->getLifePoints() > 0)
 	{
-		// Loop Logic
-		// Display and prompt
 		display();
+		if (_bonus.empty())
+		{
+			std::cout << "YOU WIN! You have " <<_player->getNbPoints() << " points" << std::endl;
+			return ;
+		}
 		if (getUserInput() == 'q')
 		{
-			std::cout << "GOOD BYE!" << std::endl;
-			return;
+			std::cout << "GOOD BYE! You have " <<_player->getNbPoints() << " points" << std::endl;
+			return ;
 		}
 		system("clear");
 		_player->move();
 		if (_player->getLifePoints() <= 0)
 		{
-			std::cout << "GAME OVER" << std::endl;
-			return;
+			std::cout << "YOU'RE DEAD! You have " <<_player->getNbPoints() << " points" << std::endl;
+			return ;
 		}
 		for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); ++it) {
 			(*it)->move();
 			(*it)->decrease();
 		}
 		cleanAll();
-		if (_bonus.empty())
-		{
-			std::cout << "YOU WIN!" << std::endl;
-			return;
-		}
 	}
+	std::cout << "YOU'RE DEAD! You have " <<_player->getNbPoints() << " points" << std::endl;
 }
