@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "Map.hh"
 
 Map::Map(const std::string map, const int sizeX, const int sizeY)
@@ -13,7 +14,10 @@ void	Map::update(Subject *sub)
 {
 	GameElement *elem = dynamic_cast<GameElement *>(sub);
 
-	(void)elem;
+	if (_map[elem->getPosy() * _sizeX + elem->getPosx()] == '#') {
+		std::cerr << "GameElement '" << elem->getName() <<"'' is inside a wall !" << std::endl;
+		throw std::logic_error("Invalid position"); 
+	}
 }
 
 void	Map::initialize(const std::string map, const int sizeX, const int sizeY) {
