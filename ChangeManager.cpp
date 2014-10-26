@@ -47,7 +47,6 @@ void	ChangeManager::Unregister_all(Subject *elem)
 				break;
 		}
 		this->observerMap.erase(it_map);
-		std::cerr << "Element observer not found in map" << std::endl;
 	}
 	else
 	{
