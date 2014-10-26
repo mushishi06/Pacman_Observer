@@ -16,7 +16,7 @@ int main()
 	Bonus bonus(0, 0, "", "Bonus 1");
 	Bonus b2(1, 1, "", "Bonus 2");
 	Player p(2, 2, "", "Player 1");
-	Monster m(11, 3, "", "Shadow");
+	Monster m(3, 11, "", "Shadow");
 
 
 	m.attach(&map);

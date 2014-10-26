@@ -2,7 +2,11 @@
 # define CYCLE_HH_
 
 #include	"ChangeManager.hh"
+#include	"GameElement.hh"
+#include	"Map.hh"
+#include	"Player.hh"
 #include	"Monster.hh"
+#include	"Bonus.hh"
 
 
 class Cycle
@@ -14,8 +18,9 @@ public:
 	void checkEatable();
 
 private:
-	std::list<Monster> monster;
-
+	Map *						_map;
+	std::list<GameElement *>	_gameElements;
+	std::list<Monster *>		_monsters;
 };
 
 #endif
