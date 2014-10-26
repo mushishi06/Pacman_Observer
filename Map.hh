@@ -7,12 +7,19 @@
 class Map : public IObserver
 {
 public:
-	Map();
+	Map(const std::string map, const int size_x, const int size_y);
 	~Map();
-	virtual void update(Subject *sub);
-	
-public:
-	char		map[12][12];
+	virtual void		update(Subject *sub);
+	const std::string	getMap() const;
+	char				getCell(int x, int y) const;
+	int					getWidth() const;
+	int					getHeight() const;
+	void				display() const;
+protected:
+	void			initialize(const std::string map, const int sizeX, const int sizeY);
+	std::string		_map;
+	int				_sizeX;
+	int				_sizeY;
 };
 
 #endif
