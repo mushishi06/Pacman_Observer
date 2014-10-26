@@ -48,3 +48,8 @@ std::string	const &GameElement::getName() const
 {
 	return (this->name);
 }
+
+bool		GameElement::getEatable()  const
+{
+	return (this->eatable);
+}

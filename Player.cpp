@@ -29,7 +29,11 @@ void	Player::update(Subject *sub)
 	
 	if (elem->getPosx() == this->posX && elem->getPosy() == this->posY)
 	{
-		if (elem)
-		this->notify();
+		if (elem->getEatable() == false)
+			--this->lifePoints;
+		else
+		{
+			this->nbPoints += elem->getNbPoints();
+		}
 	}
 }
