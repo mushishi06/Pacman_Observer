@@ -23,6 +23,7 @@ public:
 protected:
 	int			nbPoints;
 	std::string	name;
+	bool		eatable;
 	int			lifePoints;
 	std::string image;
 	int 		posX;

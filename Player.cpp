@@ -24,5 +24,12 @@ Player::~Player()
 
 void	Player::update(Subject *sub)
 {
-	(void)sub;
+	std::cout << this->name << " update" << std::endl;
+	GameElement *elem = dynamic_cast<GameElement *>(sub);
+	
+	if (elem->getPosx() == this->posX && elem->getPosy() == this->posY)
+	{
+		if (elem)
+		this->notify();
+	}
 }

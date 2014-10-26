@@ -1,7 +1,7 @@
 #include "GameElement.hh"
 
 GameElement::GameElement(std::string const &n, int points)
-: nbPoints(points), name(n)
+: nbPoints(points), name(n), eatable(true)
 {
 	std::cout << "Create " << n << std::endl;
 }
