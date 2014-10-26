@@ -34,10 +34,14 @@ void	Monster::update(Subject *sub)
 	if (elem->getLifePoints() == 0)
 	{
 		this->eatable = true;
-		this->_time = 15;
+		this->_time = 150;
 	}
 	else if (elem->getPosx() == this->posX && elem->getPosy() == this->posY)
+	{
+		if (this->eatable == true)
+			--this->lifePoints;
 		this->notify();
+	}
 }
 
 void	Monster::move() {

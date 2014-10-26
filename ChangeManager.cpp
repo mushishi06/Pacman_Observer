@@ -94,12 +94,6 @@ void	ChangeManager::notify(Subject *sub)
 		std::cerr << "subject " << elem->getName() << " notifies" << std::endl;
 		std::list<IObserver *>::iterator it;
 
-		std::cerr << "map list to notify" << std::endl;
-		for (it = it_map->second.begin(); it != it_map->second.end(); ++it)
-		{
-			std::cerr << "Observer " << (*it)->getName() << std::endl;
-		}
-
 		for (it = it_map->second.begin(); it != it_map->second.end(); ++it)
 		{
 			std::cerr << "Observer " << (*it)->getName() << std::endl;

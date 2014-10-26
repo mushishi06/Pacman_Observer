@@ -6,7 +6,7 @@
 class Monster : public ACharacter
 {
 public:
-	Monster(int posX, int posY, std::string const &image, std::string const &name = "Monster", int points = 0);
+	Monster(int posX, int posY, std::string const &image, std::string const &name = "Monster", int points = 100);
 	~Monster();
 	
 	virtual void update(Subject *sub);
