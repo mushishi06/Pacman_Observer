@@ -115,7 +115,7 @@ char Cycle::getUserInput() const
 		found = false;
 		input = getchar();
 		//		system("clear");
-		if (input == ' ')
+		if (input == ' ' || input == 'q')
 			return (input);
 
 		for (std::map<char, ACharacter::Direction>::const_iterator it = this->_authorizedMoves.begin(); it != this->_authorizedMoves.end(); ++it)
@@ -228,8 +228,17 @@ void	Cycle::gameLoop()
       system("clear");
       //      std::cerr << "end clear" << std::endl;
       display();
+      if (_bonus.empty())
+      {
+      	std::cout << "YOU WIN!" << std::endl;
+      	return ;
+      }
       // std::cerr << "end display" << std::endl;
-      getUserInput();
+      if (getUserInput() == 'q')
+      {
+      	std::cout << "GOOD BYE!" << std::endl;
+      	return ;
+      }
       //      std::cerr << "--> end user input" << std::endl;
       _player->move();
       if (_player->getLifePoints() <= 0)
@@ -239,12 +248,12 @@ void	Cycle::gameLoop()
       	}
       // std::cerr << "end player move" << std::endl;
       for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); ++it) {
-	(*it)->move();
-	(*it)->decrease();
+		(*it)->move();
+		(*it)->decrease();
       }
       //      std::cerr << "--> end monster move"<< std::endl;
       cleanAll();
       //      std::cerr << "--> end cleanAll"<< std::endl;
-
     }
+    std::cout << "YOU'RE DEAD" << std::endl;
 }
