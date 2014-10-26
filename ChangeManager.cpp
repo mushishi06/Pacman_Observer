@@ -2,7 +2,7 @@
 #include "ChangeManager.hh"
 
 ChangeManager* ChangeManager::_instance = 0;
-    
+
 
 ChangeManager::ChangeManager()
 {
@@ -31,7 +31,7 @@ void	ChangeManager::Register(Subject *elem, IObserver *obs)
 	/*@TODO: Check if obs is already on the list*/
 	this->observerMap[elem].push_front(obs);
 }
-	
+
 void	ChangeManager::Unregister(Subject *elem, IObserver *obs)
 {
 	std::map<Subject *, std::list<IObserver *> >::iterator it_map;
@@ -62,7 +62,7 @@ void	ChangeManager::Unregister(Subject *elem, IObserver *obs)
 
 void	ChangeManager::notify(Subject *sub)
 {
- 	std::cout << "ChangeManager will notify the observers of the subject" << std::endl; 
+ 	std::cout << "ChangeManager will notify the observers of the subject" << std::endl;
 	std::map<Subject *, std::list<IObserver *> >::iterator it_map;
 
 	it_map = this->observerMap.find(sub);

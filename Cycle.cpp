@@ -1,10 +1,21 @@
 #include <iostream>
+#include <sstream>
 #include <cstdio>
 #include <termios.h>
 #include <unistd.h>
 #include <cstdlib>
 #include "ACharacter.hh"
 #include "Cycle.hh"
+
+std::string intToString(int i)
+{
+    std::stringstream ss;
+    std::string s;
+    ss << i;
+    s = ss.str();
+
+    return s;
+}
 
 Cycle::Cycle()
 {
@@ -21,22 +32,28 @@ Cycle::Cycle()
 void	Cycle::initialize(std::string map, int mapSizeX, int mapSizeY) {
 	int			x = 0;
 	int			y = 0;
+	int			bonusId = 0;
+	int			specialBonusId = 0;
+	int			monsterId = 0;
 
 	for (int i = 0; i < mapSizeX * mapSizeY; ++i) {
 		x = i % mapSizeX;
 		y = i / mapSizeX;
 		if (map[i] == '.') {
 			// Create bonuses
-			_bonus.push_back(new Bonus(x, y, "", "Bonus"));
+			_bonus.push_back(new Bonus(x, y, "", "Bonus " + intToString(bonusId)));
 			map[i] = ' ';
+			++bonusId;
 		} else if (map[i] == 'o') {
 			// Create special bonuses
-			_bonus.push_back(new Bonus(x, y, "", "Special bonus", true, 20));
+			_bonus.push_back(new Bonus(x, y, "", "Special bonus " + intToString(specialBonusId), true, 20));
 			map[i] = ' ';
+			++specialBonusId;
 		} else if (map[i] == 'M') {
 			// Create monsters
-			_monsters.push_back(new Monster(x, y, "", "Monster"));
+			_monsters.push_back(new Monster(x, y, "", "Monster " + intToString(monsterId)));
 			map[i] = ' ';
+			++monsterId;
 		} else if (map[i] == 'P') {
 			// Create player
 			_player = new Player(x, y, "", "Pacman");
@@ -203,13 +220,14 @@ void	Cycle::gameLoop()
 {
   while (_player->getLifePoints() >= 0)
     {
-      //      std::cout << "Player as "<< _player->getLifePoints() << std::endl;
-      getUserInput();
-      //  std::cout << "end det input" << std::endl;
+      //std::cout << "Player as "<< _player->getLifePoints() << std::endl;
       system("clear");
-      // std::cout << "end clear" << std::endl;
+      //      std::cout << "end clear" << std::endl;
+      display();
+      // std::cout << "end display" << std::endl;
+      getUserInput();
+      //      std::cout << "--> end user input" << std::endl;
       _player->move();
-      
       if (_player->getLifePoints() <= 0)
       	{
       		std::cout << "YOU'RE DEAD" << std::endl;
@@ -220,10 +238,9 @@ void	Cycle::gameLoop()
 	(*it)->move();
 	(*it)->decrease();
       }
+      //      std::cout << "--> end monster move"<< std::endl;
       cleanAll();
+      //      std::cout << "--> end cleanAll"<< std::endl;
 
-      //std::cout << "end monster move"<< std::endl;
-      display();
-      // std::cout << "end display" << std::endl;
     }
 }

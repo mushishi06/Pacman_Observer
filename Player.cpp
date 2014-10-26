@@ -1,7 +1,7 @@
 #include "Player.hh"
 
 /*
-** To see all the elements of the class easly 
+** To see all the elements of the class easly
 */
 std::ostream& operator<<(std::ostream& os, const Player& player)
 {
@@ -12,7 +12,7 @@ std::ostream& operator<<(std::ostream& os, const Player& player)
 }
 
 Player::Player(int posX, int posY, std::string const &image, std::string const &name, int points)
-	: ACharacter(ACharacter::UP)
+	: ACharacter(ACharacter::RIGHT)
 {
 	this->posX = posX;
 	this->posY = posY;
