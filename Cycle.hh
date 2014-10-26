@@ -18,6 +18,7 @@ public:
 	void	display() const;
 	void	checkEatable();
 	char	getUserInput() const;
+	void	initialize(std::string map, int mapSizeX, int mapSizeY);
 
 private:
 	std::vector<char>	_authorizedMoves;
@@ -26,7 +27,6 @@ private:
 	std::list<Bonus *>			_bonus;
 	Player *					_player;
 	std::list<Monster *>		_monsters;
-	void						initialize();
 };
 
 #endif
