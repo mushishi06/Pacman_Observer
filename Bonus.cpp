@@ -1,6 +1,6 @@
 #include "Bonus.hh"
 
-Bonus::Bonus(int posX, int posY, std::string const &image, int points, std::string const &name)
+Bonus::Bonus(int posX, int posY, std::string const &image, std::string const &name, int points)
 : GameElement(name, points)
 {
 	this->lifePoints = 1;
@@ -17,6 +17,7 @@ void Bonus::update(Subject *sub)
 {
 	std::cout << this->name << " update" << std::endl;
 	GameElement *elem = dynamic_cast<GameElement *>(sub);
+	
 	if (elem->getPosx() == this->posX && elem->getPosy() == this->posY)
 	{
 		--this->lifePoints;

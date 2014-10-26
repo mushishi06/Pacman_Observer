@@ -6,9 +6,15 @@
 class Player : public ACharacter
 {
 public:
-	Player();
+	Player(int posX, int posY, std::string const &image, std::string const &name = "Player", int points = 0);
 	~Player();
+
+	virtual void update(Subject *sub);
 	
+protected:
+	Player();
 };
+
+std::ostream& operator<<(std::ostream& os, const Player& player);
 
 #endif
