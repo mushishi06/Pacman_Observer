@@ -1,7 +1,7 @@
 #include "Player.hh"
 
 /*
-** To see all the elements of the class easly 
+** To see all the elements of the class easly
 */
 std::ostream& operator<<(std::ostream& os, const Player& player)
 {
