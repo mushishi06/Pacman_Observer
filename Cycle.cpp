@@ -118,7 +118,7 @@ char Cycle::getUserInput() const
 
 void	Cycle::checkEatable()
 {
-	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); it++) {
+	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); ++it) {
 		if ((*it)->getEatable())
 			(*it)->decrease();
 	}
@@ -127,13 +127,13 @@ void	Cycle::checkEatable()
 void	Cycle::cleanAll()
 {
 	// Check if a bonus is eaten, if so, detach player and (for special bonuses) monsters
-	for (std::list<Bonus *>::iterator it = _bonus.begin(); it != _bonus.end(); it++) {
+	for (std::list<Bonus *>::iterator it = _bonus.begin(); it != _bonus.end(); ++it) {
 		if ((*it)->getLifePoints() <= 0)
 		{
 			Bonus* tmp = *it;
 			(*it)->detach(_player);
 			if ((*it)->isSpecial()) {
-				for (std::list<Monster *>::iterator itMonster = _monsters.begin(); itMonster != _monsters.end(); itMonster++) {
+				for (std::list<Monster *>::iterator itMonster = _monsters.begin(); itMonster != _monsters.end(); ++itMonster) {
 					(*it)->detach(*itMonster);
 				}
 			}
@@ -142,7 +142,7 @@ void	Cycle::cleanAll()
 		}
 	}
 	// Check if monsters are eaten, if so, detach map and players
-	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); it++) {
+	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); ++it) {
 		if ((*it)->getLifePoints() <= 0)
 		{
 			Monster* tmp = *it;
@@ -155,10 +155,10 @@ void	Cycle::cleanAll()
 	// Check if the player is eaten, if so, detach map, monsters and bonuses
 	if (_player->getLifePoints() <= 0) {
 		_player->detach(_map);
-		for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); it++) {
+		for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); ++it) {
 			_player->detach(*it);
 		}
-		for (std::list<Bonus *>::iterator it = _bonus.begin(); it != _bonus.end(); it++) {
+		for (std::list<Bonus *>::iterator it = _bonus.begin(); it != _bonus.end(); ++it) {
 			_player->detach(*it);
 		}
 	}
