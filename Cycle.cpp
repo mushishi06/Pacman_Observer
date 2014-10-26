@@ -143,12 +143,10 @@ void	Cycle::checkEatable()
 
 void	Cycle::cleanAll()
 {
-		  std::cerr << "--> enter CLEANALL "<< std::endl;
 	// Check if a bonus is eaten, if so, detach player and (for special bonuses) monsters
 	for (std::list<Bonus *>::iterator it = _bonus.begin(); it != _bonus.end(); ++it) {
 		if ((*it)->getLifePoints() <= 0)
 		{
-		  std::cerr << "enter getlife bonus "<< std::endl;
 			Bonus* tmp = *it;
 			(_player)->detach(*it);
 			if ((*it)->isSpecial()) {
@@ -167,7 +165,6 @@ void	Cycle::cleanAll()
 	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); ++it) {
 		if ((*it)->getLifePoints() <= 0)
 		{
-		  std::cerr << "enter getlife monster"<< std::endl;
 			Monster* tmp = *it;
 			(_player)->detach(*it);
 			for (std::list<Bonus *>::iterator itBonus = _bonus.begin(); itBonus != _bonus.end(); ++itBonus) {
@@ -194,7 +191,6 @@ void	Cycle::cleanAll()
 		}
 		_player->detach_all();
 	}
-		  std::cerr << "--> End CleanAll"<< std::endl;
 }
 
 void	Cycle::display() const {

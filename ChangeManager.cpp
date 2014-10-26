@@ -98,17 +98,13 @@ void	ChangeManager::notify(Subject *sub)
 		std::cerr << "map list to notify" << std::endl;
 		for (it = it_map->second.begin(); it != it_map->second.end(); ++it)
 		{
-			std::cerr << "BEGIN" << std::endl;
 			std::cerr << "Observer " << (*it)->getName() << std::endl;
-			std::cerr << "END" << std::endl;
 		}
 
-std::cerr << "NOTIFY" << std::endl;
 		for (it = it_map->second.begin(); it != it_map->second.end(); ++it)
 		{
 			std::cerr << "Observer " << (*it)->getName() << std::endl;
 			(*it)->update(sub);
-			std::cerr << "END" << std::endl;
 		}
 	}
 	else
