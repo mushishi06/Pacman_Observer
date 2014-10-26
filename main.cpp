@@ -13,6 +13,7 @@ int main()
 	std::srand(unsigned(std::time(0)));
 	Cycle	game;
 
+	game.display();
 
 	return (0);
 }

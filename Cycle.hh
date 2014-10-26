@@ -15,7 +15,8 @@ public:
 	Cycle();
 	~Cycle();
 
-	void checkEatable();
+	void	display() const;
+	void	checkEatable();
 
 private:
 	Map *						_map;
@@ -23,7 +24,6 @@ private:
 	Player *					_player;
 	std::list<Monster *>		_monsters;
 	void						initialize();
-	void						display() const;
 };
 
 #endif

@@ -14,7 +14,7 @@ void	Cycle::initialize() {
 
 	for (int i = 0; i < mapSizeX * mapSizeY; i++) {
 		x = i % mapSizeX;
-		y = (i - (i % mapSizeX)) / mapSizeY;
+		y = i / mapSizeX;
 		if (map[i] == '.') {
 			// Create bonuses
 			_bonus.push_back(new Bonus(x, y, "", "Bonus"));
@@ -84,9 +84,24 @@ void	Cycle::checkEatable()
 }
 
 void	Cycle::display() const {
-	std::string	tmpMap(map);
-	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); it++) {
+	std::string	tmpMap(_map->getMap());
+	// Add objects to the map
+	for (std::list<Monster *>::const_iterator it = _monsters.begin(); it != _monsters.end(); it++) {
+		tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'M';
 	}
-	for (std::list<Bonus *>::iterator it = _bonus.begin(); it != _bonus.end(); it++) {
+	for (std::list<Bonus *>::const_iterator it = _bonus.begin(); it != _bonus.end(); it++) {
+		if ((*it)->isSpecial()) {
+			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'o';
+		} else {
+			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = '.';
+		}
+	}
+	tmpMap[_player->getPosx() + _player->getPosy() * _map->getWidth()] = 'P';
+	// Display Map
+	for (int y = 0; y < _map->getHeight(); y++) {
+		for (int x= 0; x < _map->getWidth(); x++) {
+			std::cout << tmpMap[y * _map->getWidth() + x];
+		}
+		std::cout << std::endl;
 	}
 }
