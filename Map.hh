@@ -14,7 +14,6 @@ public:
 	char				getCell(int x, int y) const;
 	int					getWidth() const;
 	int					getHeight() const;
-	void				display() const;
 
 protected:
 	void			initialize(const std::string map, const int sizeX, const int sizeY);

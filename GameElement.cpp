@@ -3,12 +3,10 @@
 GameElement::GameElement(std::string const &n, int points)
 : nbPoints(points), name(n), eatable(true)
 {
-	std::cout << "Create " << n << std::endl;
 }
 
 GameElement::~GameElement()
 {
-	std::cout << "Destroy " << this->name << std::endl;
 }
 
 void	GameElement::notify()
@@ -19,13 +17,11 @@ void	GameElement::notify()
 
 void	GameElement::attach(IObserver *obs)
 {
-	std::cout << "attach to " << this->name << std::endl;
 	ChangeManager::Instance()->Register(this, obs);
 }
 
 void	GameElement::detach(IObserver *obs)
 {
-	std::cout << "detach from " << this->name << std::endl;
 	ChangeManager::Instance()->Unregister(this, obs);
 }
 

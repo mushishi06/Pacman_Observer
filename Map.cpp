@@ -24,18 +24,6 @@ void	Map::initialize(const std::string map, const int sizeX, const int sizeY) {
 	_map = std::string(map);
 	_sizeX = sizeX;
 	_sizeY = sizeY;
-
-	// Display map
-	this->display();
-}
-
-void	Map::display() const {
-	for (int y = 0; y < _sizeY; y++) {
-		for (int x= 0; x < _sizeX; x++) {
-			std::cout << _map[y * _sizeX + x];
-		}
-		std::cout << std::endl;
-	}
 }
 
 
