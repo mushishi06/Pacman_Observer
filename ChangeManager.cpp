@@ -6,12 +6,12 @@ ChangeManager* ChangeManager::_instance = 0;
 
 ChangeManager::ChangeManager()
 {
-	std::cout << "Create ChangeManager" << std::endl;
+	std::cerr << "Create ChangeManager" << std::endl;
 }
 
 ChangeManager::~ChangeManager()
 {
-	std::cout << "Destroy ChangeManager" << std::endl;
+	std::cerr << "Destroy ChangeManager" << std::endl;
 }
 
 /*
@@ -52,34 +52,33 @@ void	ChangeManager::Unregister(Subject *elem, IObserver *obs)
 				return ;
 			}
 		}
-		std::cout << "Element observer not found in map" << std::endl;
+		std::cerr << "Element observer not found in map" << std::endl;
 	}
 	else
 	{
-		std::cout << "Element subject not found in map" << std::endl;
+		std::cerr << "Element subject not found in map" << std::endl;
 	}
 }
 
 void	ChangeManager::notify(Subject *sub)
 {
- 	std::cout << "ChangeManager will notify the observers of the subject" << std::endl;
+ 	std::cerr << "ChangeManager will notify the observers of the subject" << std::endl;
 	std::map<Subject *, std::list<IObserver *> >::iterator it_map;
 
 	it_map = this->observerMap.find(sub);
 	if (it_map != this->observerMap.end())
 	{
 		GameElement *elem = dynamic_cast<GameElement *>(it_map->first);
-		std::cout << "subject " << elem->getName() << " notifies" << std::endl;
+		std::cerr << "subject " << elem->getName() << " notifies" << std::endl;
 		std::list<IObserver *>::iterator it;
 		for (it = it_map->second.begin(); it != it_map->second.end(); ++it)
 		{
-			std::cout << "Observer " << (*it)->getName() << std::endl;
+			std::cerr << "Observer " << (*it)->getName() << std::endl;
 			(*it)->update(sub);
 		}
-		std::cout << "EXIT" << std::endl;
 	}
 	else
 	{
-		std::cout << "Element subject not found in map" << std::endl;
+		std::cerr << "Element subject not found in map" << std::endl;
 	}
 }

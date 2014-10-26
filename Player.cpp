@@ -28,7 +28,7 @@ Player::~Player()
 
 void	Player::update(Subject *sub)
 {
-	std::cout << this->name << " update" << std::endl;
+	std::cerr << this->name << ": update()" << std::endl;
 	GameElement *elem = dynamic_cast<GameElement *>(sub);
 
 	if (elem->getPosx() == this->posX && elem->getPosy() == this->posY)

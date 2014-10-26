@@ -15,7 +15,7 @@ void	ACharacter::changeDirection(ACharacter::Direction dir)
 {
 	static std::string const dirName[4] = {"up", "right", "down", "left"};
 
-	std::cout << "Changing direction to " << dirName[dir] << std::endl;
+	std::cerr << this->getName() << ": Changing direction to " << dirName[dir] << std::endl;
 	this->direction = dir;
 }
 
@@ -45,11 +45,11 @@ void	ACharacter::move()
 	this->updateNewPosition(this->direction);
 	try {
 		// Notify ChangeManager
-		std::cout << "Current position is (" << previousPosX << ";" << previousPosY << "), moving to (" << this->posX << ";" << this->posY << ")" << std::endl;
+		std::cerr << this->getName() << ": Current position is (" << previousPosX << ";" << previousPosY << "), moving to (" << this->posX << ";" << this->posY << ")" << std::endl;
 		this->notify();
 	} catch (std::exception e) {
 		// Can't move to new position
-		std::cout << "Can't move, stay in the same position" << std::endl;
+		std::cerr << this->getName() << ": Can't move, stay in the same position" << std::endl;
 		this->posX = previousPosX;
 		this->posY = previousPosY;
 	}

@@ -15,17 +15,15 @@ Bonus::~Bonus()
 
 void Bonus::update(Subject *sub)
 {
-	std::cout << this->name << " update" << std::endl;
+	std::cerr << this->name << ": update()" << std::endl;
 	GameElement *elem = dynamic_cast<GameElement *>(sub);
 
 	if (elem->getPosx() == this->posX && elem->getPosy() == this->posY)
 	{
-		std::cout << this->name << " is getting eaten" << std::endl;
+		std::cerr << this->name << ": is getting eaten" << std::endl;
 		--this->lifePoints;
 		this->notify();
 	}
-	std::cout << "--> end bonus "<< std::endl;
-
 }
 
 bool	Bonus::isSpecial() const

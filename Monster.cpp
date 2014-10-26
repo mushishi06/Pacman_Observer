@@ -28,7 +28,7 @@ Monster::Monster(int posX, int posY, std::string const &image, std::string const
 
 void	Monster::update(Subject *sub)
 {
-	std::cout << this->name << " update" << std::endl;
+	std::cerr << this->name << ": update()" << std::endl;
 	GameElement *elem = dynamic_cast<GameElement *>(sub);
 
 	if (elem->getLifePoints() == 0)
