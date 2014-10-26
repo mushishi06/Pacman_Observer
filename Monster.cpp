@@ -20,6 +20,7 @@ Monster::Monster(int posX, int posY, std::string const &image, std::string const
 	this->posY = posY;
 	this->image = image;
 	this->nbPoints = points;
+	this->lifePoints = 1;
 	this->name = name;
 	this->eatable = false;
 	this->_time = 0;
@@ -91,5 +92,5 @@ void	Monster::decrease()
 
 Monster::~Monster()
 {
-	
+
 }
