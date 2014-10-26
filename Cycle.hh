@@ -17,6 +17,7 @@ public:
 	~Cycle();
 	void	display() const;
 	void	checkEatable();
+	void	cleanAll();
 	char	getUserInput() const;
 
 private:
