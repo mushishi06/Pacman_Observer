@@ -11,7 +11,7 @@ GameElement::~GameElement()
 
 void	GameElement::notify()
 {
-	std::cout << "GameElement " << this->name << " notify" << std::endl;
+	std::cout << "GameElement " << this->name << " notify its observers" << std::endl;
 	ChangeManager::Instance()->notify(this);
 }
 

@@ -13,6 +13,9 @@ ChangeManager::~ChangeManager()
 	std::cout << "Destroy ChangeManager" << std::endl;
 }
 
+/*
+* Singleton design pattern
+*/
 ChangeManager* ChangeManager::Instance ()
 {
     if (_instance == 0)
@@ -58,7 +61,7 @@ void	ChangeManager::Unregister(Subject *elem, IObserver *obs)
 
 void	ChangeManager::notify(Subject *sub)
 {
- 	std::cout << "notify ChangeManager" << std::endl; 
+ 	std::cout << "ChangeManager will notify the observers of the subject" << std::endl; 
 	std::map<Subject *, std::list<IObserver *> >::iterator it_map;
 
 	it_map = this->observerMap.find(sub);
