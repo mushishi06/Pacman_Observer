@@ -15,15 +15,9 @@ class Cycle
 public:
 	Cycle();
 	~Cycle();
-<<<<<<< HEAD
-
 	void	display() const;
 	void	checkEatable();
-=======
-	
-	char getUserInput() const;
-	void checkEatable();
->>>>>>> 3a8cb0f62aa08e46a3e9cc5a211618922166679c
+	char	getUserInput() const;
 
 private:
 	std::vector<char>	_authorizedMoves;
