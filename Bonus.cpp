@@ -1,7 +1,7 @@
 #include "Bonus.hh"
 
-Bonus::Bonus(int posX, int posY, std::string const &image, std::string const &name, int points)
-: GameElement(name, points)
+Bonus::Bonus(int posX, int posY, std::string const &image, std::string const &name, bool special, int points)
+: GameElement(name, points), _special(special)
 {
 	this->lifePoints = 1;
 	this->posX = posX;
@@ -23,4 +23,9 @@ void Bonus::update(Subject *sub)
 		--this->lifePoints;
 		this->notify();
 	}
+}
+
+bool	Bonus::isSpecial() const
+{
+	return (this->_special);
 }
