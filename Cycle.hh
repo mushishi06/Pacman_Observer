@@ -20,6 +20,7 @@ public:
 	void	display() const;
 	void	checkEatable();
 	void	cleanAll();
+	void	gameLoop();
 	char	getUserInput() const;
 	void	initialize(std::string map, int mapSizeX, int mapSizeY);
 
