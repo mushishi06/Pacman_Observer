@@ -2,6 +2,9 @@
 #include <vector>       // std::vector
 #include "Monster.hh"
 
+/*
+** To see all the elements of the class easly 
+*/
 std::ostream& operator<<(std::ostream& os, const Monster& monster)
 {
 	static std::string const dir[4] = {"up", "right", "down", "left"};
@@ -17,6 +20,7 @@ Monster::Monster(int posX, int posY, std::string const &image, std::string const
 	this->posY = posY;
 	this->image = image;
 	this->nbPoints = points;
+	this->lifePoints = 1;
 	this->name = name;
 	this->eatable = false;
 	this->_time = 0;
@@ -88,5 +92,5 @@ void	Monster::decrease()
 
 Monster::~Monster()
 {
-	
+
 }
