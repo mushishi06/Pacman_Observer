@@ -17,9 +17,11 @@ class Cycle
 public:
 	Cycle();
 	~Cycle();
-	
-	char getUserInput() const;
-	void checkEatable();
+	void	display() const;
+	void	checkEatable();
+	void	cleanAll();
+	char	getUserInput() const;
+	void	initialize(std::string map, int mapSizeX, int mapSizeY);
 
 private:
 	std::map<char, ACharacter::Direction>	_authorizedMoves;
@@ -28,8 +30,6 @@ private:
 	std::list<Bonus *>			_bonus;
 	Player *					_player;
 	std::list<Monster *>		_monsters;
-	void						initialize();
-	void						display() const;
 };
 
 #endif

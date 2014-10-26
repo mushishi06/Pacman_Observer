@@ -16,20 +16,15 @@ Cycle::Cycle()
 	tcgetattr(0, &this->_t); //get the current terminal I/O structure
     this->_t.c_lflag &= ~ICANON; //Manipulate the flag bits to do what you want it to do
     tcsetattr(0, TCSANOW, &this->_t); //Apply the new settings
-
-	this->initialize();
 }
 
-void	Cycle::initialize() {
-	std::string map = "#############################M...........##...........M##.####.#####.##.#####.####.##o####.#####.##.#####.####o##.####.#####.##.#####.####.##..........................##.####.##.########.##.####.##.####.##.########.##.####.##......##....##....##......#######.##### ## #####.############.##### ## #####.########.....##    P     ##.....####.###.## ###++### ##.###.####.###.## #++++++# ##.###.####o....   #++++++#   ....o####.###.## #++++++# ##.###.####.###.## ######## ##.###.####.....##          ##.....########.## ######## ##.############.## ######## ##.#######............##............##.####.#####.##.#####.####.##.####.#####.##.#####.####.##o..##................##..o####.##.##.########.##.##.######.##.##.########.##.##.####......##....##....##......##.##########.##.##########.##.##########.##.##########.##M........................M#############################";
-	int			mapSizeX = 28;
-	int			mapSizeY = 31;
+void	Cycle::initialize(std::string map, int mapSizeX, int mapSizeY) {
 	int			x = 0;
 	int			y = 0;
 
 	for (int i = 0; i < mapSizeX * mapSizeY; i++) {
 		x = i % mapSizeX;
-		y = (i - (i % mapSizeX)) / mapSizeY;
+		y = i / mapSizeX;
 		if (map[i] == '.') {
 			// Create bonuses
 			_bonus.push_back(new Bonus(x, y, "", "Bonus"));
@@ -129,6 +124,42 @@ void	Cycle::checkEatable()
 	}
 }
 
-void	Cycle::display() const {
+void	Cycle::cleanAll()
+{
+	for (std::list<GameElement *>::iterator it = _gameElements.begin(); it != _gameElements.end(); it++) {
+		if ((*it)->getLifePoints() <= 0)
+		  {
+		    GameElement* tmp = *it;
+		    (*it)->detach(_player);
+		    it = _gameElements.erase(it);
+		    delete tmp;
+		  }
+	}
+}
 
+void	Cycle::display() const {
+	std::string	tmpMap(_map->getMap());
+	// Add objects to the map
+	for (std::list<Monster *>::const_iterator it = _monsters.begin(); it != _monsters.end(); it++) {
+		if ((*it)->getEatable()) {
+			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'W';
+		} else {
+			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'M';
+		}
+	}
+	for (std::list<Bonus *>::const_iterator it = _bonus.begin(); it != _bonus.end(); it++) {
+		if ((*it)->isSpecial()) {
+			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'o';
+		} else {
+			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = '.';
+		}
+	}
+	tmpMap[_player->getPosx() + _player->getPosy() * _map->getWidth()] = 'P';
+	// Display Map
+	for (int y = 0; y < _map->getHeight(); y++) {
+		for (int x= 0; x < _map->getWidth(); x++) {
+			std::cout << tmpMap[y * _map->getWidth() + x];
+		}
+		std::cout << std::endl;
+	}
 }
