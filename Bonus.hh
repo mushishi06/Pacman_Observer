@@ -6,10 +6,13 @@
 class Bonus : public GameElement
 {
 public:
-	Bonus(int points = 1);
+	Bonus(int posX, int posY, std::string const &image, int points = 1, std::string const &name = "Bonus");
 	~Bonus();
 	
 	virtual void update(Subject *sub);
+protected:
+	Bonus();
+
 };
 
 #endif

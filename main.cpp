@@ -6,11 +6,9 @@
 int main()
 {
 	std::cout << "SALUT" << std::endl;
-	Bonus bonus;
-	Bonus b2;
-	Map	m;
+	Bonus bonus(0, 0, "", 1, "Bonus 1");
+	Bonus b2(1, 1, "", 1, "Bonus 2");
 
-(void)m;
 	bonus.attach(&b2);
 	bonus.notify();
 	bonus.detach(&b2);
