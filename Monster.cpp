@@ -22,7 +22,6 @@ Monster::Monster(int posX, int posY, std::string const &image, std::string const
 
 void	Monster::update(Subject *sub)
 {
-	(void)sub;
 	if (sub->lifePoints == 0)
 		{
 			this->eatable = true;
