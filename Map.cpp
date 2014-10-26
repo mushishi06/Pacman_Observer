@@ -2,12 +2,18 @@
 #include "Map.hh"
 
 Map::Map(const std::string map, const int sizeX, const int sizeY)
+	: _name("Map")
 {
 	initialize(map, sizeX, sizeY);
 }
 
 Map::~Map()
 {
+}
+
+std::string const &Map::getName() const
+{
+	return (this->_name);
 }
 
 void	Map::update(Subject *sub)

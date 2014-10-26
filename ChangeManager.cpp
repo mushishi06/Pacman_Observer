@@ -1,3 +1,4 @@
+#include "GameElement.hh"
 #include "ChangeManager.hh"
 
 ChangeManager* ChangeManager::_instance = 0;
@@ -67,11 +68,15 @@ void	ChangeManager::notify(Subject *sub)
 	it_map = this->observerMap.find(sub);
 	if (it_map != this->observerMap.end())
 	{
+		GameElement *elem = dynamic_cast<GameElement *>(it_map->first);
+		std::cout << "subject " << elem->getName() << " notifies" << std::endl;
 		std::list<IObserver *>::iterator it;
 		for (it = it_map->second.begin(); it != it_map->second.end(); ++it)
 		{
+			std::cout << "Observer " << (*it)->getName() << std::endl;
 			(*it)->update(sub);
 		}
+		std::cout << "EXIT" << std::endl;
 	}
 	else
 	{

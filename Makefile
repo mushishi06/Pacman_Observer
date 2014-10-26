@@ -1,6 +1,6 @@
 NAME	=	pacman
 CC		=	g++
-CXXFLAGS	=	-W -Wall -Werror
+CXXFLAGS	=	-W -Wall -Werror -g3
 RM		=	rm -f
 SRCS	=	main.cpp	\
 			GameElement.cpp \

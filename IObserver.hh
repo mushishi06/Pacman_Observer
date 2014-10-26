@@ -8,6 +8,7 @@ class IObserver
 public:
 	virtual ~IObserver() {};
 	virtual void update(Subject*subj) = 0;
+	virtual std::string const &getName() const = 0;
 };
 
 #endif
