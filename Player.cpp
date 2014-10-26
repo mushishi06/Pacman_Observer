@@ -16,6 +16,7 @@ Player::Player(int posX, int posY, std::string const &image, std::string const &
 	this->image = image;
 	this->nbPoints = points;
 	this->name = name;
+	this->lifePoints = 1;
 }
 
 Player::~Player()

@@ -97,7 +97,7 @@ char Cycle::getUserInput() const
 	{
 		found = false;
 		input = getchar();
-		system("clear");
+		//		system("clear");
 		if (input == ' ')
 			return (input);
 
@@ -195,12 +195,17 @@ void	Cycle::gameLoop()
 {
   while (_player->getLifePoints() >= 0)
     {
+      //      std::cout << "Player as "<< _player->getLifePoints() << std::endl;
       getUserInput();
+      //  std::cout << "end det input" << std::endl;
+      system("clear");
+      // std::cout << "end clear" << std::endl;
       _player->move();
-	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); it++)
-	  (*it)->move();
+      // std::cout << "end player move" << std::endl;
+      for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); it++)
+	(*it)->move();
+      //std::cout << "end monster move"<< std::endl;
       display();
-
-
+      // std::cout << "end display" << std::endl;
     }
 }
