@@ -117,7 +117,11 @@ void	Cycle::display() const {
 	std::string	tmpMap(_map->getMap());
 	// Add objects to the map
 	for (std::list<Monster *>::const_iterator it = _monsters.begin(); it != _monsters.end(); it++) {
-		tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'M';
+		if ((*it)->getEatable()) {
+			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'W';
+		} else {
+			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'M';
+		}
 	}
 	for (std::list<Bonus *>::const_iterator it = _bonus.begin(); it != _bonus.end(); it++) {
 		if ((*it)->isSpecial()) {
