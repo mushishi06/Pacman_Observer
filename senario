@@ -1,0 +1,11 @@
+move player right
+move player left
+move player up
+move player down
+player eat bonus
+player eat superBonus
+player eat monster in superBonus
+monster eat player in superBonus
+monster eat player
+player has eat all
+
