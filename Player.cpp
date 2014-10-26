@@ -12,7 +12,7 @@ std::ostream& operator<<(std::ostream& os, const Player& player)
 }
 
 Player::Player(int posX, int posY, std::string const &image, std::string const &name, int points)
-	: ACharacter(ACharacter::UP)
+	: ACharacter(ACharacter::RIGHT)
 {
 	this->posX = posX;
 	this->posY = posY;
