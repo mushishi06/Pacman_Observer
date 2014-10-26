@@ -1,7 +1,7 @@
 #include "GameElement.hh"
 
 GameElement::GameElement(std::string const &n, int points)
-: nbPoints(points), name(n)
+: nbPoints(points), name(n), eatable(true)
 {
 	std::cout << "Create " << n << std::endl;
 }
@@ -29,17 +29,22 @@ void	GameElement::detach(IObserver *obs)
 	ChangeManager::Instance()->Unregister(this, obs);
 }
 
-int			GameElement::getNbPoints()
+int			GameElement::getNbPoints() const
 {
 	return (this->nbPoints);
 }
 
-int			GameElement::getPosx()
+int			GameElement::getPosx() const
 {
 	return (this->posX);
 }
 
-int			GameElement::getPosy()
+int			GameElement::getPosy() const
 {
 	return (this->posY);
+}
+
+std::string	const &GameElement::getName() const
+{
+	return (this->name);
 }

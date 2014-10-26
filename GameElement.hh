@@ -15,13 +15,15 @@ public:
 	virtual void	attach(IObserver *obs);
 	virtual void	detach(IObserver *obs);
 
-	int			getNbPoints();
-	int			getPosx();
-	int			getPosy();
+	int			getNbPoints() const;
+	int			getPosx() const;
+	int			getPosy() const;
+	std::string	const &getName() const;
 
 protected:
 	int			nbPoints;
 	std::string	name;
+	bool		eatable;
 	int			lifePoints;
 	std::string image;
 	int 		posX;
