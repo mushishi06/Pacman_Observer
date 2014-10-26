@@ -22,6 +22,8 @@ private:
 	std::list<Bonus *>			_bonus;
 	Player *					_player;
 	std::list<Monster *>		_monsters;
+	void						initialize();
+	void						display() const;
 };
 
 #endif
