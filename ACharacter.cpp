@@ -19,11 +19,8 @@ void	ACharacter::changeDirection(ACharacter::Direction dir)
 	this->direction = dir;
 }
 
-void	ACharacter::move()
-{
-	int		previousPosX = this->posX;
-	int		previousPosY = this->posY;
-	switch (this->direction) {
+void	ACharacter::updateNewPosition(ACharacter::Direction dir) {
+	switch (dir) {
 		case ACharacter::UP:
 			this->posY--;
 			break;
@@ -39,6 +36,13 @@ void	ACharacter::move()
 		default:
 			break;
 	}
+}
+
+void	ACharacter::move()
+{
+	int previousPosX = this->posX;
+	int previousPosY = this->posY;
+	this->updateNewPosition(this->direction);
 	try {
 		// Notify ChangeManager
 		std::cout << "Current position is (" << previousPosX << ";" << previousPosY << "), moving to (" << this->posX << ";" << this->posY << ")" << std::endl;

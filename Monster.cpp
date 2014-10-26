@@ -1,3 +1,5 @@
+#include <algorithm>    // std::random_shuffle
+#include <vector>       // std::vector
 #include "Monster.hh"
 
 std::ostream& operator<<(std::ostream& os, const Monster& monster)
@@ -32,6 +34,46 @@ void	Monster::update(Subject *sub)
 		}
 	else if (elem->getPosx() == this->posX && elem->getPosy() == this->posY)
 		this->notify();
+}
+
+void	Monster::move() {
+	int previousPosX = this->posX;
+	int previousPosY = this->posY;
+	std::vector<ACharacter::Direction> validDirections;
+
+	// Try to go forward
+	try {
+		this->updateNewPosition(this->direction);
+		this->notify();
+		validDirections.push_back(this->direction);
+	} catch (std::exception e) {}
+	// Try to go right from current direction
+	try {
+		this->posX = previousPosX;
+		this->posY = previousPosY;
+		this->updateNewPosition(static_cast<ACharacter::Direction>((this->direction + 1) % 4));
+		this->notify();
+		validDirections.push_back(static_cast<ACharacter::Direction>((this->direction + 1) % 4));
+	} catch (std::exception e) {}
+	// Try to go left from current direction
+	try {
+		this->posX = previousPosX;
+		this->posY = previousPosY;
+		this->updateNewPosition(static_cast<ACharacter::Direction>((this->direction + 3) % 4));
+		this->notify();
+		validDirections.push_back(static_cast<ACharacter::Direction>((this->direction + 3) % 4));
+	} catch (std::exception e) {}
+
+	// Randomize valid directions
+	std::random_shuffle(validDirections.begin(), validDirections.end());
+	// Choose random direction
+	this->direction = validDirections.back();
+	// Update position with current direction
+	this->posX = previousPosX;
+	this->posY = previousPosY;
+	this->updateNewPosition(this->direction);
+	// And finally, move !
+	this->notify();
 }
 
 void	Monster::decrease()
