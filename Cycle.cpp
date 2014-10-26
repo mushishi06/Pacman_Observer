@@ -190,3 +190,17 @@ void	Cycle::display() const {
 		std::cout << std::endl;
 	}
 }
+
+void	Cycle::gameLoop()
+{
+  while (_player->getLifePoints() >= 0)
+    {
+      getUserInput();
+      _player->move();
+	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); it++)
+	  (*it)->move();
+      display();
+
+
+    }
+}
