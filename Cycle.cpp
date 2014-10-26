@@ -220,13 +220,14 @@ void	Cycle::gameLoop()
 {
   while (_player->getLifePoints() >= 0)
     {
-      //      std::cout << "Player as "<< _player->getLifePoints() << std::endl;
-      getUserInput();
-      //  std::cout << "end det input" << std::endl;
+      //std::cout << "Player as "<< _player->getLifePoints() << std::endl;
       system("clear");
-      // std::cout << "end clear" << std::endl;
+      //      std::cout << "end clear" << std::endl;
+      display();
+      // std::cout << "end display" << std::endl;
+      getUserInput();
+      //      std::cout << "--> end user input" << std::endl;
       _player->move();
-      
       if (_player->getLifePoints() <= 0)
       	{
       		std::cout << "YOU'RE DEAD" << std::endl;
@@ -237,10 +238,9 @@ void	Cycle::gameLoop()
 	(*it)->move();
 	(*it)->decrease();
       }
+      //      std::cout << "--> end monster move"<< std::endl;
       cleanAll();
+      //      std::cout << "--> end cleanAll"<< std::endl;
 
-      //std::cout << "end monster move"<< std::endl;
-      display();
-      // std::cout << "end display" << std::endl;
     }
 }
