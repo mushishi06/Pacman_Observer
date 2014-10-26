@@ -3,6 +3,7 @@
 #include "Bonus.hh"
 #include "Map.hh"
 #include "Player.hh"
+#include "Cycle.hh"
 
 int main()
 {
@@ -29,5 +30,11 @@ int main()
 	
 
 	p.detach(&m);
+
+	Cycle c;
+
+	std::cout << "type smth" << std::endl;
+	char cmd = c.getUserInput();
+	std::cout << "Commande is == " << cmd << std::endl;
 	return (0);
 }
