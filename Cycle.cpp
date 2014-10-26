@@ -167,18 +167,18 @@ void	Cycle::cleanAll()
 void	Cycle::display() const {
 	std::string	tmpMap(_map->getMap());
 	// Add objects to the map
-	for (std::list<Monster *>::const_iterator it = _monsters.begin(); it != _monsters.end(); it++) {
-		if ((*it)->getEatable()) {
-			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'W';
-		} else {
-			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'M';
-		}
-	}
 	for (std::list<Bonus *>::const_iterator it = _bonus.begin(); it != _bonus.end(); it++) {
 		if ((*it)->isSpecial()) {
 			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'o';
 		} else {
 			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = '.';
+		}
+	}
+	for (std::list<Monster *>::const_iterator it = _monsters.begin(); it != _monsters.end(); it++) {
+		if ((*it)->getEatable()) {
+			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'W';
+		} else {
+			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'M';
 		}
 	}
 	tmpMap[_player->getPosx() + _player->getPosy() * _map->getWidth()] = 'P';
@@ -193,19 +193,19 @@ void	Cycle::display() const {
 
 void	Cycle::gameLoop()
 {
-  while (_player->getLifePoints() >= 0)
-    {
-      //      std::cout << "Player as "<< _player->getLifePoints() << std::endl;
-      getUserInput();
-      //  std::cout << "end det input" << std::endl;
-      system("clear");
-      // std::cout << "end clear" << std::endl;
-      _player->move();
-      // std::cout << "end player move" << std::endl;
-      for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); it++)
-	(*it)->move();
-      //std::cout << "end monster move"<< std::endl;
-      display();
-      // std::cout << "end display" << std::endl;
-    }
+	while (_player->getLifePoints() >= 0)
+	{
+		//      std::cout << "Player as "<< _player->getLifePoints() << std::endl;
+		getUserInput();
+		//  std::cout << "end det input" << std::endl;
+		system("clear");
+		// std::cout << "end clear" << std::endl;
+		_player->move();
+		// std::cout << "end player move" << std::endl;
+		for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); it++)
+			(*it)->move();
+		//std::cout << "end monster move"<< std::endl;
+		display();
+		// std::cout << "end display" << std::endl;
+	}
 }
