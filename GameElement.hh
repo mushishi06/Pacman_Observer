@@ -10,7 +10,7 @@ class GameElement : public IObserver, public Subject
 public:
 	GameElement(std::string const &name = "Generic", int nbPoints = 0);
 	virtual ~GameElement();
-	virtual void update(Subject *sub) = 0;
+	virtual void	update(Subject *sub) = 0;
 	virtual void	notify();
 	virtual void	attach(IObserver *obs);
 	virtual void	detach(IObserver *obs);
@@ -19,6 +19,7 @@ public:
 	int			getPosx() const;
 	int			getPosy() const;
 	std::string	const &getName() const;
+	bool		getEatable() const;
 
 protected:
 	int			nbPoints;
