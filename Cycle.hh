@@ -17,6 +17,7 @@ public:
 	~Cycle();
 	void	display() const;
 	void	checkEatable();
+	void	cleanAll();
 	char	getUserInput() const;
 	void	initialize(std::string map, int mapSizeX, int mapSizeY);
 
