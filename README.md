@@ -32,6 +32,10 @@ You can play on two different maps:
     ./pacman --map1
     ./pacman --map2
 
+Disable debug for smoother display:
+
+    ./pacman 2> /dev/null
+
 How to play
 -----------
 In this Pacman game, you play step by step. You choose your direction (up, down, left, right) and then validate. You and the monsters will then move and the display will update.

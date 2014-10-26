@@ -214,7 +214,15 @@ void	Cycle::display() const {
 	// Display Map
 	for (int y = 0; y < _map->getHeight(); y++) {
 		for (int x= 0; x < _map->getWidth(); x++) {
-			std::cout << tmpMap[y * _map->getWidth() + x];
+			if (tmpMap[y * _map->getWidth() + x] == 'M') {
+				std::cout << "\033[1;31m" << tmpMap[y * _map->getWidth() + x] << "\033[0m";
+			} else if (tmpMap[y * _map->getWidth() + x] == 'W') {
+				std::cout << "\033[1;32m" << tmpMap[y * _map->getWidth() + x] << "\033[0m";
+			}  else if (tmpMap[y * _map->getWidth() + x] == 'P') {
+				std::cout << "\033[1;34m" << tmpMap[y * _map->getWidth() + x] << "\033[0m";
+			} else {
+				std::cout << tmpMap[y * _map->getWidth() + x];
+			}
 		}
 		std::cout << std::endl;
 	}

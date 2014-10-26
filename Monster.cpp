@@ -34,7 +34,7 @@ void	Monster::update(Subject *sub)
 	if (elem->getLifePoints() == 0)
 	{
 		this->eatable = true;
-		this->_time = 5;
+		this->_time = 15;
 	}
 	else if (elem->getPosx() == this->posX && elem->getPosy() == this->posY)
 		this->notify();
