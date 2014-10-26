@@ -2,18 +2,16 @@
 #include <cstdio>
 #include <termios.h>
 #include <unistd.h>
+#include <cstdlib>
+#include "ACharacter.hh"
 #include "Cycle.hh"
 
 Cycle::Cycle()
 {
-	static char moves[4] = {'t', 'f', 'g', 'h'};
-	int i = 0;
-
-	while (i < 4)
-	{
-		this->_authorizedMoves.push_back(moves[i]);
-		++i;
-	}
+	this->_authorizedMoves['t'] = ACharacter::UP;
+	this->_authorizedMoves['h'] = ACharacter::RIGHT;
+	this->_authorizedMoves['g'] = ACharacter::DOWN;
+	this->_authorizedMoves['f'] = ACharacter::LEFT;
 
 	tcgetattr(0, &this->_t); //get the current terminal I/O structure
     this->_t.c_lflag &= ~ICANON; //Manipulate the flag bits to do what you want it to do
@@ -97,16 +95,29 @@ Cycle::~Cycle()
 
 char Cycle::getUserInput() const
 {
+	bool found = false;
 	char input;
 
-	input = getchar();
-
-	for (std::vector<char>::const_iterator it = this->_authorizedMoves.begin(); it != this->_authorizedMoves.end(); ++it)
+	while (true)
 	{
-		if (*it == input)
+		found = false;
+		input = getchar();
+		system("clear");
+		if (input == ' ')
 			return (input);
+
+		for (std::map<char, ACharacter::Direction>::const_iterator it = this->_authorizedMoves.begin(); it != this->_authorizedMoves.end(); ++it)
+		{
+			if (it->first == input)
+				{
+					this->_player->changeDirection(it->second);
+					found = true;
+					break;
+				}
+		}
+		if (!found)
+			std::cout << "wrong command " << input << std::endl;
 	}
-	std::cout << "wrong command " << input << std::endl;
 	return ('\0');
 }
 
