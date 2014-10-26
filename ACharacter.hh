@@ -24,6 +24,7 @@ public:
 
 protected:
 	Direction	direction;
+	void		updateNewPosition(Direction dir);
 
 };
 
