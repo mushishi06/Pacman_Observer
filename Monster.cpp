@@ -22,12 +22,15 @@ Monster::Monster(int posX, int posY, std::string const &image, std::string const
 
 void	Monster::update(Subject *sub)
 {
-	if (sub->lifePoints == 0)
+	std::cout << this->name << " update" << std::endl;
+	GameElement *elem = dynamic_cast<GameElement *>(sub);
+
+	if (elem->getLifePoints() == 0)
 		{
 			this->eatable = true;
 			this->_time = 5;
 		}
-	else if (sub->posX == this->posX && sub->posY == this->posY)
+	else if (elem->getPosx() == this->posX && elem->getPosy() == this->posY)
 		this->notify();
 }
 

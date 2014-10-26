@@ -53,3 +53,8 @@ bool		GameElement::getEatable()  const
 {
 	return (this->eatable);
 }
+
+int			GameElement::getLifePoints() const
+{
+	return (this->lifePoints);
+}

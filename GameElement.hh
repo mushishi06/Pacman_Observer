@@ -15,6 +15,7 @@ public:
 	virtual void	attach(IObserver *obs);
 	virtual void	detach(IObserver *obs);
 
+	int			getLifePoints() const;
 	int			getNbPoints() const;
 	int			getPosx() const;
 	int			getPosy() const;
