@@ -8,8 +8,9 @@ int main()
 	std::cout << "SALUT" << std::endl;
 	Bonus bonus;
 	Bonus b2;
-	(void)Map	m;
+	Map	m;
 
+(void)m;
 	bonus.attach(&b2);
 	bonus.notify();
 	bonus.detach(&b2);
