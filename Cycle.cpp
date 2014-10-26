@@ -156,6 +156,7 @@ void	Cycle::cleanAll()
 					(*itMonster)->detach(*it);
 				}
 			}
+			(*it)->detach_all();
 			it = _bonus.erase(it);
 			delete tmp;
 			if (it == _bonus.end())
@@ -169,7 +170,13 @@ void	Cycle::cleanAll()
 		  std::cerr << "enter getlife monster"<< std::endl;
 			Monster* tmp = *it;
 			(_player)->detach(*it);
-			(_map)->detach(*it);
+			for (std::list<Bonus *>::iterator itBonus = _bonus.begin(); itBonus != _bonus.end(); ++itBonus) {
+				if ((*itBonus)->isSpecial()) {
+					(*itBonus)->detach(*it);
+				}
+			}
+
+			(*it)->detach_all();
 			it = _monsters.erase(it);
 			delete tmp;
 			if (it == _monsters.end())
@@ -180,11 +187,12 @@ void	Cycle::cleanAll()
 	if (_player->getLifePoints() <= 0) {
 		_player->detach(_map);
 		for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); ++it) {
-			_player->detach(*it);
+			(*it)->detach(_player);
 		}
 		for (std::list<Bonus *>::iterator it = _bonus.begin(); it != _bonus.end(); ++it) {
-			_player->detach(*it);
+			(*it)->detach(_player);
 		}
+		_player->detach_all();
 	}
 		  std::cerr << "--> End CleanAll"<< std::endl;
 }
