@@ -7,7 +7,7 @@
 #include "ACharacter.hh"
 #include "Cycle.hh"
 
-std::string intToString(int i)
+static std::string intToString(int i)
 {
     std::stringstream ss;
     std::string s;
@@ -143,12 +143,12 @@ void	Cycle::checkEatable()
 
 void	Cycle::cleanAll()
 {
-		  std::cout << "--> enter CLEANALL "<< std::endl;
+		  std::cerr << "--> enter CLEANALL "<< std::endl;
 	// Check if a bonus is eaten, if so, detach player and (for special bonuses) monsters
 	for (std::list<Bonus *>::iterator it = _bonus.begin(); it != _bonus.end(); ++it) {
 		if ((*it)->getLifePoints() <= 0)
 		{
-		  std::cout << "enter getlife bonus "<< std::endl;
+		  std::cerr << "enter getlife bonus "<< std::endl;
 			Bonus* tmp = *it;
 			(_player)->detach(*it);
 			if ((*it)->isSpecial()) {
@@ -166,7 +166,7 @@ void	Cycle::cleanAll()
 	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); ++it) {
 		if ((*it)->getLifePoints() <= 0)
 		{
-		  std::cout << "enter getlife monster"<< std::endl;
+		  std::cerr << "enter getlife monster"<< std::endl;
 			Monster* tmp = *it;
 			(_player)->detach(*it);
 			(_map)->detach(*it);
@@ -186,7 +186,7 @@ void	Cycle::cleanAll()
 			_player->detach(*it);
 		}
 	}
-		  std::cout << "--> End CleanAll"<< std::endl;
+		  std::cerr << "--> End CleanAll"<< std::endl;
 }
 
 void	Cycle::display() const {
@@ -220,27 +220,27 @@ void	Cycle::gameLoop()
 {
   while (_player->getLifePoints() >= 0)
     {
-      //std::cout << "Player as "<< _player->getLifePoints() << std::endl;
+      //std::cerr << "Player as "<< _player->getLifePoints() << std::endl;
       system("clear");
-      //      std::cout << "end clear" << std::endl;
+      //      std::cerr << "end clear" << std::endl;
       display();
-      // std::cout << "end display" << std::endl;
+      // std::cerr << "end display" << std::endl;
       getUserInput();
-      //      std::cout << "--> end user input" << std::endl;
+      //      std::cerr << "--> end user input" << std::endl;
       _player->move();
       if (_player->getLifePoints() <= 0)
       	{
       		std::cout << "YOU'RE DEAD" << std::endl;
       		return ;
       	}
-      // std::cout << "end player move" << std::endl;
+      // std::cerr << "end player move" << std::endl;
       for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); ++it) {
 	(*it)->move();
 	(*it)->decrease();
       }
-      //      std::cout << "--> end monster move"<< std::endl;
+      //      std::cerr << "--> end monster move"<< std::endl;
       cleanAll();
-      //      std::cout << "--> end cleanAll"<< std::endl;
+      //      std::cerr << "--> end cleanAll"<< std::endl;
 
     }
 }
