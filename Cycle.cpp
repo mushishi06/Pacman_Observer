@@ -22,7 +22,7 @@ void	Cycle::initialize(std::string map, int mapSizeX, int mapSizeY) {
 	int			x = 0;
 	int			y = 0;
 
-	for (int i = 0; i < mapSizeX * mapSizeY; i++) {
+	for (int i = 0; i < mapSizeX * mapSizeY; ++i) {
 		x = i % mapSizeX;
 		y = i / mapSizeX;
 		if (map[i] == '.') {
@@ -48,26 +48,26 @@ void	Cycle::initialize(std::string map, int mapSizeX, int mapSizeY) {
 
 	// Attach everything correctly
 	// Monster 	attach Map, Player
-	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); it++) {
+	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); ++it) {
 		(*it)->attach(_map);
 		(*it)->attach(_player);
 	}
 	// Bonus 	attach Player
 	// S.Bonus 	attach Monster, Player
-	for (std::list<Bonus *>::iterator it = _bonus.begin(); it != _bonus.end(); it++) {
+	for (std::list<Bonus *>::iterator it = _bonus.begin(); it != _bonus.end(); ++it) {
 		(*it)->attach(_player);
 		if ((*it)->isSpecial()) {
-			for (std::list<Monster *>::iterator itMonster = _monsters.begin(); itMonster != _monsters.end(); itMonster++) {
+			for (std::list<Monster *>::iterator itMonster = _monsters.begin(); itMonster != _monsters.end(); ++itMonster) {
 				(*it)->attach(*itMonster);
 			}
 		}
 	}
 	// Player 	attach Bonus, Map, Monster
 	_player->attach(_map);
-	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); it++) {
+	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); ++it) {
 		_player->attach(*it);
 	}
-	for (std::list<Bonus *>::iterator it = _bonus.begin(); it != _bonus.end(); it++) {
+	for (std::list<Bonus *>::iterator it = _bonus.begin(); it != _bonus.end(); ++it) {
 		_player->attach(*it);
 	}
 }
@@ -80,10 +80,10 @@ Cycle::~Cycle()
 
     delete _map;
 	delete _player;
-	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); it++) {
+	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); ++it) {
 		delete *it;
 	}
-	for (std::list<Bonus *>::iterator it = _bonus.begin(); it != _bonus.end(); it++) {
+	for (std::list<Bonus *>::iterator it = _bonus.begin(); it != _bonus.end(); ++it) {
 		delete *it;
 	}
 }
@@ -175,13 +175,6 @@ void	Cycle::cleanAll()
 void	Cycle::display() const {
 	std::string	tmpMap(_map->getMap());
 	// Add objects to the map
-	for (std::list<Monster *>::const_iterator it = _monsters.begin(); it != _monsters.end(); ++it) {
-		if ((*it)->getEatable()) {
-			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'W';
-		} else {
-			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'M';
-		}
-	}
 	for (std::list<Bonus *>::const_iterator it = _bonus.begin(); it != _bonus.end(); ++it) {
 		if ((*it)->isSpecial()) {
 			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'o';
@@ -189,7 +182,7 @@ void	Cycle::display() const {
 			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = '.';
 		}
 	}
-	for (std::list<Monster *>::const_iterator it = _monsters.begin(); it != _monsters.end(); it++) {
+	for (std::list<Monster *>::const_iterator it = _monsters.begin(); it != _monsters.end(); ++it) {
 		if ((*it)->getEatable()) {
 			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'W';
 		} else {
@@ -218,7 +211,12 @@ void	Cycle::gameLoop()
       getUserInput();
       //      std::cout << "--> end user input" << std::endl;
       _player->move();
-      //      std::cout << "--> end player move" << std::endl;
+      if (_player->getLifePoints() <= 0)
+      	{
+      		std::cout << "YOU'RE DEAD" << std::endl;
+      		return ;
+      	}
+      // std::cout << "end player move" << std::endl;
       for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); ++it) {
 	(*it)->move();
 	(*it)->decrease();
