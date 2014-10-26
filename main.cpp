@@ -11,13 +11,9 @@
 int main()
 {
 	std::srand(unsigned(std::time(0)));
-	Cycle	game;
+	Cycle	c;
 
-<<<<<<< HEAD
-	game.display();
-=======
-	Cycle c;
->>>>>>> 3a8cb0f62aa08e46a3e9cc5a211618922166679c
+	c.display();
 
 	std::cout << "type smth" << std::endl;
 	char cmd = c.getUserInput();
