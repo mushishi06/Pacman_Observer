@@ -8,7 +8,12 @@ class Cycle
 public:
 	Cycle();
 	~Cycle();
-	
+
+	checkEatable();
+
+private:
+  std::list<> monster;
+
 };
 
 #endif
