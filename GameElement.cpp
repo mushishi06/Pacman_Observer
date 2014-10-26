@@ -20,8 +20,14 @@ void	GameElement::attach(IObserver *obs)
 	ChangeManager::Instance()->Register(this, obs);
 }
 
+void	GameElement::detach_all()
+{
+	ChangeManager::Instance()->Unregister_all(this);
+}
+
 void	GameElement::detach(IObserver *obs)
 {
+	std::cout << "Detaching " << obs->getName() << " from " << this->getName() << std::endl;
 	ChangeManager::Instance()->Unregister(this, obs);
 }
 

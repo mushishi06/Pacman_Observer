@@ -14,6 +14,7 @@ public:
 	virtual void	notify();
 	virtual void	attach(IObserver *obs);
 	virtual void	detach(IObserver *obs);
+	virtual void	detach_all();
 
 	int			getLifePoints() const;
 	int			getNbPoints() const;
