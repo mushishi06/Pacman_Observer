@@ -18,9 +18,14 @@ Cycle::Cycle()
 	tcgetattr(0, &this->_t); //get the current terminal I/O structure
     this->_t.c_lflag &= ~ICANON; //Manipulate the flag bits to do what you want it to do
     tcsetattr(0, TCSANOW, &this->_t); //Apply the new settings
+
+	this->initialize();
 }
 
-void	Cycle::initialize(std::string map, int mapSizeX, int mapSizeY) {
+void	Cycle::initialize() {
+	std::string map = "#############################M...........##...........M##.####.#####.##.#####.####.##o####.#####.##.#####.####o##.####.#####.##.#####.####.##..........................##.####.##.########.##.####.##.####.##.########.##.####.##......##....##....##......#######.##### ## #####.############.##### ## #####.########.....##    P     ##.....####.###.## ###++### ##.###.####.###.## #++++++# ##.###.####o....   #++++++#   ....o####.###.## #++++++# ##.###.####.###.## ######## ##.###.####.....##          ##.....########.## ######## ##.############.## ######## ##.#######............##............##.####.#####.##.#####.####.##.####.#####.##.#####.####.##o..##................##..o####.##.##.########.##.##.######.##.##.########.##.##.####......##....##....##......##.##########.##.##########.##.##########.##.##########.##M........................M#############################";
+	int			mapSizeX = 28;
+	int			mapSizeY = 31;
 	int			x = 0;
 	int			y = 0;
 
@@ -110,6 +115,19 @@ void	Cycle::checkEatable()
 	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); it++) {
 		if ((*it)->getEatable())
 			(*it)->decrease();
+	}
+}
+
+void	Cycle::cleanAll()
+{
+	for (std::list<GameElement *>::iterator it = _gameElements.begin(); it != _gameElements.end(); it++) {
+		if ((*it)->getLifePoints() <= 0)
+		  {
+		    GameElement* tmp = *it;
+		    (*it)->detach(_player);
+		    it = _gameElements.erase(it);
+		    delete tmp;
+		  }
 	}
 }
 
