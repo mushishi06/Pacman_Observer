@@ -150,7 +150,7 @@ void	Cycle::cleanAll()
 		{
 		  std::cout << "enter getlife bonus "<< std::endl;
 			Bonus* tmp = *it;
-			(*it)->detach(_player);
+			(_player)->detach(*it);
 			if ((*it)->isSpecial()) {
 				for (std::list<Monster *>::iterator itMonster = _monsters.begin(); itMonster != _monsters.end(); ++itMonster) {
 					(*it)->detach(*itMonster);
