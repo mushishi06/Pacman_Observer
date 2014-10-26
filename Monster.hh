@@ -11,6 +11,7 @@ public:
 	
 	virtual void update(Subject *sub);
 	void 	decrease();
+	virtual void	move();
 
 protected:
 	Monster();
