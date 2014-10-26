@@ -29,14 +29,45 @@ Cycle::Cycle()
 			map[i] = ' ';
 		}
 	}
-
 	// Create map
 	_map = new Map(map, mapSizeX, mapSizeY);
+
+	// Attach everything correctly
+	// Monster 	attach Map, Player
+	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); it++) {
+		(*it)->attach(_map);
+		(*it)->attach(_player);
+	}
+	// Bonus 	attach Player
+	// S.Bonus 	attach Monster, Player
+	for (std::list<Bonus *>::iterator it = _bonus.begin(); it != _bonus.end(); it++) {
+		(*it)->attach(_player);
+		if ((*it)->isSpecial()) {
+			for (std::list<Monster *>::iterator itMonster = _monsters.begin(); itMonster != _monsters.end(); itMonster++) {
+				(*it)->attach(*itMonster);
+			}
+		}
+	}
+	// Player 	attach Bonus, Map, Monster
+	_player->attach(_map);
+	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); it++) {
+		_player->attach(*it);
+	}
+	for (std::list<Bonus *>::iterator it = _bonus.begin(); it != _bonus.end(); it++) {
+		_player->attach(*it);
+	}
 }
 
 Cycle::~Cycle()
 {
 	delete _map;
+	delete _player;
+	for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); it++) {
+		delete *it;
+	}
+	for (std::list<Bonus *>::iterator it = _bonus.begin(); it != _bonus.end(); it++) {
+		delete *it;
+	}
 }
 
 
