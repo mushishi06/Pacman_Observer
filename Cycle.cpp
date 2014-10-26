@@ -18,8 +18,6 @@ Cycle::Cycle()
 	tcgetattr(0, &this->_t); //get the current terminal I/O structure
     this->_t.c_lflag &= ~ICANON; //Manipulate the flag bits to do what you want it to do
     tcsetattr(0, TCSANOW, &this->_t); //Apply the new settings
-
-	this->initialize();
 }
 
 void	Cycle::initialize(std::string map, int mapSizeX, int mapSizeY) {
