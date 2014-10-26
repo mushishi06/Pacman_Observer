@@ -32,10 +32,10 @@ void	Monster::update(Subject *sub)
 	GameElement *elem = dynamic_cast<GameElement *>(sub);
 
 	if (elem->getLifePoints() == 0)
-		{
-			this->eatable = true;
-			this->_time = 5;
-		}
+	{
+		this->eatable = true;
+		this->_time = 5;
+	}
 	else if (elem->getPosx() == this->posX && elem->getPosy() == this->posY)
 		this->notify();
 }

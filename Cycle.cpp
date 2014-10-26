@@ -135,7 +135,7 @@ void	Cycle::cleanAll()
 			Bonus* tmp = *it;
 			(*it)->detach(_player);
 			if ((*it)->isSpecial()) {
-				for (std::list<Monster *>::iterator itMonster = _monsters.begin(); itMonster != _monsters.end(); itMonster++) {
+				for (std::list<Monster *>::iterator itMonster = _monsters.begin(); itMonster != _monsters.end(); ++itMonster) {
 					(*it)->detach(*itMonster);
 				}
 			}
@@ -187,6 +187,13 @@ void	Cycle::display() const {
 			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'o';
 		} else {
 			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = '.';
+		}
+	}
+	for (std::list<Monster *>::const_iterator it = _monsters.begin(); it != _monsters.end(); it++) {
+		if ((*it)->getEatable()) {
+			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'W';
+		} else {
+			tmpMap[(*it)->getPosx() + (*it)->getPosy() * _map->getWidth()] = 'M';
 		}
 	}
 	tmpMap[_player->getPosx() + _player->getPosy() * _map->getWidth()] = 'P';

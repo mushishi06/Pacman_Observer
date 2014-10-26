@@ -1,5 +1,8 @@
 #include "Player.hh"
 
+/*
+** To see all the elements of the class easly 
+*/
 std::ostream& operator<<(std::ostream& os, const Player& player)
 {
 	static std::string const dir[4] = {"up", "right", "down", "left"};
