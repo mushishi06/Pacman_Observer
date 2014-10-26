@@ -1,3 +1,4 @@
+#include <stdexcept> 
 #include "ACharacter.hh"
 
 ACharacter::ACharacter(Direction dir)
@@ -18,11 +19,36 @@ void	ACharacter::changeDirection(ACharacter::Direction dir)
 	this->direction = dir;
 }
 
-void	ACharacter::move(int x, int y)
+void	ACharacter::move()
 {
-	std::cout << "Moving to x = " << x << " - y = " << y << std::endl;
-	this->posX = x;
-	this->posY = y;
+	int		previousPosX = this->posX;
+	int		previousPosY = this->posY;
+	switch (this->direction) {
+		case ACharacter::UP:
+			this->posY--;
+			break;
+		case ACharacter::RIGHT:
+			this->posX++;
+			break;
+		case ACharacter::DOWN:
+			this->posY++;
+			break;
+		case ACharacter::LEFT:
+			this->posX--;
+			break;
+		default:
+			break;
+	}
+	try {
+		// Notify ChangeManager
+		std::cout << "Current position is (" << previousPosX << ";" << previousPosY << "), moving to (" << this->posX << ";" << this->posY << ")" << std::endl;
+		this->notify();
+	} catch (std::exception e) {
+		// Can't move to new position
+		std::cout << "Can't move, stay in the same position" << std::endl;
+		this->posX = previousPosX;
+		this->posY = previousPosY;
+	}
 }
 
 ACharacter::Direction	ACharacter::getDirection() const

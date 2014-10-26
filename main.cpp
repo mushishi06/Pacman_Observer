@@ -12,6 +12,7 @@ int main()
 	Bonus bonus(0, 0, "", "Bonus 1");
 	Bonus b2(1, 1, "", "Bonus 2");
 	Player p(2, 2, "", "Player 1");
+	p.attach(&m);
 
 	bonus.attach(&b2);
 	bonus.notify();
@@ -19,10 +20,14 @@ int main()
 
 	std::cout << p << std::endl;
 
-	p.move(4, 4);
-	p.changeDirection(ACharacter::DOWN);
+	p.move();
+	std::cout << p << std::endl;
 
+	p.changeDirection(ACharacter::DOWN);
+	p.move();
 	std::cout << p << std::endl;
 	
+
+	p.detach(&m);
 	return (0);
 }

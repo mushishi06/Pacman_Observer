@@ -18,8 +18,8 @@ public:
 
 	virtual void update(Subject *sub) = 0;
 
-	void	changeDirection(Direction dir);
-	void	move(int x, int y);
+	void		changeDirection(Direction dir);
+	void		move();
 	Direction	getDirection() const;
 
 protected:
