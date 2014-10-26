@@ -19,7 +19,8 @@ public:
 
 private:
 	Map *						_map;
-	std::list<GameElement *>	_gameElements;
+	std::list<Bonus *>			_bonus;
+	Player *					_player;
 	std::list<Monster *>		_monsters;
 };
 
