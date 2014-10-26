@@ -2,9 +2,11 @@
 # define CYCLE_HH_
 
 #include <vector>
+#include <map>
 #include <termios.h>
 #include "ChangeManager.hh"
 #include	"GameElement.hh"
+#include "ACharacter.hh"
 #include	"Map.hh"
 #include	"Player.hh"
 #include	"Monster.hh"
@@ -22,7 +24,7 @@ public:
 	void	initialize(std::string map, int mapSizeX, int mapSizeY);
 
 private:
-	std::vector<char>	_authorizedMoves;
+	std::map<char, ACharacter::Direction>	_authorizedMoves;
 	struct termios		_t;
 	Map *						_map;
 	std::list<Bonus *>			_bonus;

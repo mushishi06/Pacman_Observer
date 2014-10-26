@@ -15,6 +15,7 @@ public:
 	int					getWidth() const;
 	int					getHeight() const;
 	void				display() const;
+
 protected:
 	void			initialize(const std::string map, const int sizeX, const int sizeY);
 	std::string		_map;
