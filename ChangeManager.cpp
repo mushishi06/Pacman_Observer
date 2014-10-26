@@ -32,6 +32,29 @@ void	ChangeManager::Register(Subject *elem, IObserver *obs)
 	this->observerMap[elem].push_front(obs);
 }
 
+void	ChangeManager::Unregister_all(Subject *elem)
+{
+	std::map<Subject *, std::list<IObserver *> >::iterator it_map;
+
+	it_map = this->observerMap.find(elem);
+	if (it_map != this->observerMap.end())
+	{
+		std::list<IObserver *>::iterator it;
+		for (it = it_map->second.begin(); it != it_map->second.end(); ++it)
+		{
+			it = it_map->second.erase(it);
+			if (it == it_map->second.end())
+				break;
+		}
+		this->observerMap.erase(it_map);
+		std::cerr << "Element observer not found in map" << std::endl;
+	}
+	else
+	{
+		std::cerr << "Element subject not found in map" << std::endl;
+	}
+}
+
 void	ChangeManager::Unregister(Subject *elem, IObserver *obs)
 {
 	std::map<Subject *, std::list<IObserver *> >::iterator it_map;
@@ -71,10 +94,21 @@ void	ChangeManager::notify(Subject *sub)
 		GameElement *elem = dynamic_cast<GameElement *>(it_map->first);
 		std::cerr << "subject " << elem->getName() << " notifies" << std::endl;
 		std::list<IObserver *>::iterator it;
+
+		std::cerr << "map list to notify" << std::endl;
+		for (it = it_map->second.begin(); it != it_map->second.end(); ++it)
+		{
+			std::cerr << "BEGIN" << std::endl;
+			std::cerr << "Observer " << (*it)->getName() << std::endl;
+			std::cerr << "END" << std::endl;
+		}
+
+std::cerr << "NOTIFY" << std::endl;
 		for (it = it_map->second.begin(); it != it_map->second.end(); ++it)
 		{
 			std::cerr << "Observer " << (*it)->getName() << std::endl;
 			(*it)->update(sub);
+			std::cerr << "END" << std::endl;
 		}
 	}
 	else

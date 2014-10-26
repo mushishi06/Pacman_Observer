@@ -14,6 +14,7 @@ public:
 	~ChangeManager();
 	void	Register(Subject *elem, IObserver *obs);
 	void	Unregister(Subject *elem, IObserver *obs);
+	void	Unregister_all(Subject *elem);
 	void	notify(Subject *sub);
 
 protected:
