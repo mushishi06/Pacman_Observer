@@ -238,20 +238,20 @@ void	Cycle::gameLoop()
       display();
       if (_bonus.empty())
       {
-      	std::cout << "YOU WIN!" << std::endl;
+      	std::cout << "YOU WIN! You have " <<_player->getNbPoints() << " points" << std::endl;
       	return ;
       }
       // std::cerr << "end display" << std::endl;
       if (getUserInput() == 'q')
       {
-      	std::cout << "GOOD BYE!" << std::endl;
+      	std::cout << "GOOD BYE! You have " <<_player->getNbPoints() << " points" << std::endl;
       	return ;
       }
       //      std::cerr << "--> end user input" << std::endl;
       _player->move();
       if (_player->getLifePoints() <= 0)
       	{
-      		std::cout << "YOU'RE DEAD" << std::endl;
+      		std::cout << "YOU'RE DEAD! You have " <<_player->getNbPoints() << " points" << std::endl;
       		return ;
       	}
       // std::cerr << "end player move" << std::endl;
@@ -263,5 +263,5 @@ void	Cycle::gameLoop()
       cleanAll();
       //      std::cerr << "--> end cleanAll"<< std::endl;
     }
-    std::cout << "YOU'RE DEAD" << std::endl;
+    std::cout << "YOU'RE DEAD! You have " <<_player->getNbPoints() << " points" << std::endl;
 }
