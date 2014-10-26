@@ -10,13 +10,13 @@ GameElement::~GameElement()
 {
 	std::cout << "Destroy " << this->name << std::endl;
 }
-	
+
 void	GameElement::notify()
 {
 	std::cout << "GameElement " << this->name << " notify" << std::endl;
 	ChangeManager::Instance()->notify(this);
 }
-	
+
 void	GameElement::attach(IObserver *obs)
 {
 	std::cout << "attach to " << this->name << std::endl;

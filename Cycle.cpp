@@ -11,11 +11,11 @@ Cycle::~Cycle()
 }
 
 
-Cycle::checkEatable()
+void	Cycle::checkEatable()
 {
-  for (std::list<int>::iterator it = monster.begin(); it != monster.end(); it++)
+  for (std::list<Monster>::iterator it = monster.begin(); it != monster.end(); it++)
     {
-      if (it->eatable)
+      if (it->getEatable())
 	it->decrease();
     }
 }

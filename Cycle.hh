@@ -1,7 +1,9 @@
 #ifndef CYCLE_HH_
 # define CYCLE_HH_
 
-#include "ChangeManager.hh"
+#include	"ChangeManager.hh"
+#include	"Monster.hh"
+
 
 class Cycle
 {
@@ -9,10 +11,10 @@ public:
 	Cycle();
 	~Cycle();
 
-	checkEatable();
+	void checkEatable();
 
 private:
-  std::list<> monster;
+	std::list<Monster> monster;
 
 };
 
