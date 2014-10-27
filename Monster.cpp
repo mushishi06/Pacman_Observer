@@ -33,11 +33,13 @@ void	Monster::update(Subject *sub)
 
 	if (elem->getLifePoints() == 0)
 	{
+		std::cerr << this->name << " can now be eaten" << std::endl;
 		this->eatable = true;
-		this->_time = 150;
+		this->_time = 15;
 	}
 	else if (elem->getPosx() == this->posX && elem->getPosy() == this->posY)
 	{
+		std::cerr << this->name << " is on the same cell as " << elem->getName() << std::endl;
 		if (this->eatable == true)
 			--this->lifePoints;
 		this->notify();

@@ -20,6 +20,7 @@ void	Map::update(Subject *sub)
 {
 	GameElement *elem = dynamic_cast<GameElement *>(sub);
 
+	std::cerr << this->_name << ": update()" << std::endl;
 	if (_map[elem->getPosy() * _sizeX + elem->getPosx()] == '#') {
 		std::cerr << elem->getName() <<": is inside a wall !" << std::endl;
 		throw std::logic_error("Invalid position"); 

@@ -96,7 +96,7 @@ void	ChangeManager::notify(Subject *sub)
 
 		for (it = it_map->second.begin(); it != it_map->second.end(); ++it)
 		{
-			std::cerr << "Observer " << (*it)->getName() << std::endl;
+			std::cerr << "Observer " << (*it)->getName() << "(" << elem->getName() << ")" << std::endl;
 			(*it)->update(sub);
 		}
 	}

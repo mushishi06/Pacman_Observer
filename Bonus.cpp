@@ -18,7 +18,6 @@ void Bonus::update(Subject *sub)
 	std::cerr << this->name << ": update()" << std::endl;
 	GameElement *elem = dynamic_cast<GameElement *>(sub);
 
-	std::cerr << "sub is == " << elem->getName() << std::endl;
 	if (elem->getPosx() == this->posX && elem->getPosy() == this->posY)
 	{
 		std::cerr << this->name << ": is getting eaten" << std::endl;

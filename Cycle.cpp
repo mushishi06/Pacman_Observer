@@ -251,6 +251,7 @@ void	Cycle::gameLoop()
 			return ;
 		}
 		for (std::list<Monster *>::iterator it = _monsters.begin(); it != _monsters.end(); ++it) {
+			std::cerr << "Moving monster " << (*it)->getName() << std::endl;
 			(*it)->move();
 			(*it)->decrease();
 		}

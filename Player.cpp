@@ -34,9 +34,13 @@ void	Player::update(Subject *sub)
 	if (elem->getPosx() == this->posX && elem->getPosy() == this->posY)
 	{
 		if (elem->getEatable() == false)
+		{
+			std::cerr << this->name << " will be dead" << std::endl;
 			--this->lifePoints;
+		}
 		else
 		{
+			std::cerr << this->name << " is getting more points." << std::endl;
 			this->nbPoints += elem->getNbPoints();
 		}
 	}
