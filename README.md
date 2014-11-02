@@ -48,3 +48,4 @@ Controls
     F       Move left
     H       Move right
     Space   Validate your move
+    Q	    Exit game
